@@ -3,7 +3,7 @@
 ## 📸 Screenshots
 
 <p align="center">
-  <img src="[screenshots/home](https://github.com/Ashikur758/IT24047_-quiz_game/blob/6a2e8a86814b60dabc20b4011200b45626ad8633/picture1.png" width="45%">
+  <img src="https://github.com/Ashikur758/IT24047_-quiz_game/blob/6a2e8a86814b60dabc20b4011200b45626ad8633/picture1.png" width="45%">
   <img src="screenshots/quiz.png" width="45%">
 </p>
 
