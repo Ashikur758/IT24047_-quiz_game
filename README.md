@@ -1,8 +1,8 @@
-# Sirajganj District Knowledge Quiz
+# Sirajganj District Knowledge Quiz project
 
 A Servlet, JSP, and JDBC CRUD application.
 
-Players answer **10 random unique questions** from a bank of 20 questions about Sirajganj District, Bangladesh.
+Players answer **20 random unique questions** from a bank of 20 questions about Sirajganj District, Bangladesh.
 
 The homepage title is:
 
