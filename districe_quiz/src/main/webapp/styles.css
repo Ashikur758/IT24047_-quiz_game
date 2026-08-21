@@ -1,0 +1,624 @@
+/* ==========================================================================
+   Sirajganj District Quiz — shared stylesheet
+   Theme: handloom weave borders (Sirajganj/Tangail textile heritage)
+           + the Jamuna river running through the district
+   ========================================================================== */
+
+:root {
+    /* Palette — maroon & gold from the woven sari border, teal from the river */
+    --maroon: #8b2635;
+    --maroon-deep: #6b1d28;
+    --maroon-tint: #fdf3f2;
+    --teal: #1f4e4a;
+    --teal-deep: #163a37;
+    --teal-tint: #e8f0ee;
+    --gold: #c99a3a;
+    --gold-soft: #e3c27a;
+    --ivory: #f7f0e3;
+    --paper: #fffdf9;
+    --ink: #2a2118;
+    --body-text: #5c4f41;
+    --muted: #9c8b76;
+    --border: #e4d9c5;
+
+    --radius-sm: 10px;
+    --radius: 14px;
+    --radius-lg: 20px;
+
+    --shadow-sm: 0 2px 10px rgba(42, 33, 24, 0.05);
+    --shadow-md: 0 16px 32px -14px rgba(42, 33, 24, 0.18);
+    --shadow-lg: 0 30px 60px -20px rgba(42, 33, 24, 0.3);
+
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: 'Manrope', system-ui, sans-serif;
+    color: var(--body-text);
+    -webkit-font-smoothing: antialiased;
+}
+
+/* --------------------------------------------------------------------
+   Full-page photo background — 3 images cross-fading every 3 seconds
+   -------------------------------------------------------------------- */
+.bg-slideshow {
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    overflow: hidden;
+    background: var(--ivory);
+}
+
+.bg-slideshow img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    animation: slide-fade 9s ease-in-out infinite;
+}
+
+.bg-slideshow img:nth-child(1) { animation-delay: 0s; }
+.bg-slideshow img:nth-child(2) { animation-delay: 3s; }
+.bg-slideshow img:nth-child(3) { animation-delay: 6s; }
+
+.bg-slideshow::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(180deg, rgba(247, 240, 227, 0.86) 0%, rgba(247, 240, 227, 0.92) 100%);
+}
+
+@keyframes slide-fade {
+    0%   { opacity: 0; }
+    4%   { opacity: 1; }
+    30%  { opacity: 1; }
+    37%  { opacity: 0; }
+    100% { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .bg-slideshow img { animation: none; opacity: 1; }
+    .bg-slideshow img:not(:first-child) { display: none; }
+}
+
+.page-bg {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 24px;
+}
+
+.page-bg-scroll {
+    min-height: 100vh;
+    padding: 48px 20px 72px;
+}
+
+/* --------------------------------------------------------------------
+   Signature motif — woven border stripe, used as an accent everywhere
+   -------------------------------------------------------------------- */
+.weave-strip {
+    height: 10px;
+    width: 100%;
+    background: repeating-linear-gradient(
+        90deg,
+        var(--maroon) 0px, var(--maroon) 14px,
+        var(--gold) 14px, var(--gold) 18px,
+        var(--teal) 18px, var(--teal) 32px,
+        var(--gold) 32px, var(--gold) 36px
+    );
+    background-size: 200% 100%;
+    animation: weave-drift 14s linear infinite;
+}
+
+.weave-strip.thin {
+    height: 8px;
+    border-radius: 6px;
+    margin-bottom: 26px;
+}
+
+@keyframes weave-drift {
+    from { background-position: 0% 0; }
+    to { background-position: -200% 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .weave-strip { animation: none; }
+}
+
+/* --------------------------------------------------------------------
+   Cards
+   -------------------------------------------------------------------- */
+.card {
+    width: 100%;
+    background: var(--paper);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+    animation: rise-in 0.6s var(--ease) both;
+}
+
+.card-inner {
+    padding: 48px 42px 42px;
+    text-align: center;
+}
+
+@keyframes rise-in {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .card { animation: none; }
+}
+
+/* --------------------------------------------------------------------
+   Brand badge / icon chip
+   -------------------------------------------------------------------- */
+.brand-badge {
+    width: 64px;
+    height: 64px;
+    background: var(--teal-tint);
+    color: var(--teal);
+    border: 1.5px solid rgba(31, 78, 74, 0.18);
+    border-radius: 18px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 22px;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.4);
+}
+
+.brand-badge svg { width: 30px; height: 30px; fill: currentColor; }
+
+/* --------------------------------------------------------------------
+   Type
+   -------------------------------------------------------------------- */
+.eyebrow {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--maroon);
+    margin-bottom: 10px;
+}
+
+h1.display {
+    font-family: 'Fraunces', serif;
+    font-size: 32px;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+    margin-bottom: 12px;
+}
+
+.subtitle {
+    color: var(--body-text);
+    font-size: 15px;
+    line-height: 1.65;
+    margin-bottom: 36px;
+}
+
+.footnote {
+    margin-top: 24px;
+    font-size: 12.5px;
+    color: var(--muted);
+    letter-spacing: 0.01em;
+}
+
+/* --------------------------------------------------------------------
+   Form fields
+   -------------------------------------------------------------------- */
+.form-group {
+    text-align: left;
+    margin-bottom: 28px;
+}
+
+label {
+    display: block;
+    font-size: 12.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    color: var(--body-text);
+    margin-bottom: 9px;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 15px 18px;
+    font-size: 15px;
+    font-family: inherit;
+    color: var(--ink);
+    background: #ffffff;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    outline: none;
+    transition: border-color 0.2s var(--ease), box-shadow 0.2s var(--ease);
+}
+
+input[type="text"]::placeholder { color: #c2b39c; }
+
+input[type="text"]:focus {
+    border-color: var(--teal);
+    box-shadow: 0 0 0 4px rgba(31, 78, 74, 0.13);
+}
+
+/* --------------------------------------------------------------------
+   Buttons
+   -------------------------------------------------------------------- */
+.btn-primary {
+    display: block;
+    width: 100%;
+    padding: 17px;
+    font-size: 15.5px;
+    font-weight: 700;
+    font-family: 'Manrope', sans-serif;
+    letter-spacing: 0.01em;
+    color: #fff7ee;
+    text-align: center;
+    text-decoration: none;
+    background: linear-gradient(135deg, var(--maroon) 0%, var(--maroon-deep) 100%);
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    box-shadow: 0 12px 24px -8px rgba(139, 38, 53, 0.48);
+    transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 18px 32px -8px rgba(139, 38, 53, 0.55);
+}
+
+.btn-primary:active { transform: translateY(0); }
+
+.btn-primary:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 3px;
+}
+
+/* --------------------------------------------------------------------
+   Top bar — High Score pill (left aligned)
+   -------------------------------------------------------------------- */
+.topbar {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 18px;
+}
+
+.high-score-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: var(--paper);
+    color: var(--maroon);
+    font-size: 13px;
+    font-weight: 700;
+    padding: 9px 18px;
+    border-radius: 30px;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+}
+
+.high-score-pill .hs-label {
+    color: var(--body-text);
+    font-weight: 600;
+}
+
+/* --------------------------------------------------------------------
+   Quiz header
+   -------------------------------------------------------------------- */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.quiz-header {
+    background: var(--paper);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-md);
+    margin-bottom: 34px;
+    overflow: hidden;
+    animation: rise-in 0.5s var(--ease) both;
+}
+
+.quiz-header-body {
+    padding: 30px 36px 32px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.quiz-header-title h1 {
+    font-family: 'Fraunces', serif;
+    font-size: 26px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 8px;
+}
+
+.quiz-header-title p {
+    font-size: 14px;
+    color: var(--body-text);
+}
+
+.quiz-header-title strong { color: var(--teal); font-weight: 700; }
+
+.badge-counter {
+    background: var(--teal-tint);
+    color: var(--teal);
+    font-size: 13px;
+    font-weight: 700;
+    padding: 9px 20px;
+    border-radius: 30px;
+    border: 1px solid rgba(31, 78, 74, 0.15);
+    white-space: nowrap;
+    margin-top: 14px;
+}
+
+/* --------------------------------------------------------------------
+   Question cards
+   -------------------------------------------------------------------- */
+.question-card {
+    background: var(--paper);
+    border-radius: var(--radius);
+    padding: 32px 34px;
+    margin-bottom: 22px;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow 0.2s var(--ease), border-color 0.2s var(--ease);
+    animation: rise-in 0.5s var(--ease) both;
+}
+
+.question-card:hover {
+    box-shadow: var(--shadow-md);
+    border-color: var(--gold-soft);
+}
+
+.question-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+.question-number {
+    font-family: 'Fraunces', serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 0.03em;
+}
+
+.upazila-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--teal);
+    background: var(--teal-tint);
+    border: 1px solid rgba(31, 78, 74, 0.18);
+    padding: 5px 13px;
+    border-radius: 6px;
+}
+
+.question-text {
+    font-size: 18.5px;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.55;
+    margin-bottom: 24px;
+}
+
+/* --------------------------------------------------------------------
+   One question at a time — step visibility + navigation bar
+   -------------------------------------------------------------------- */
+.q-step { display: none; }
+.q-step.active { display: block; animation: rise-in 0.4s var(--ease) both; }
+
+.quiz-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    background: var(--paper);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    box-shadow: var(--shadow-sm);
+    position: sticky;
+    bottom: 16px;
+}
+
+.q-counter {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--body-text);
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+}
+
+.quiz-nav .btn-primary,
+.quiz-nav .btn-secondary {
+    width: auto;
+    padding: 12px 24px;
+    font-size: 14.5px;
+}
+
+.btn-secondary {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 700;
+    font-size: 14.5px;
+    color: var(--teal);
+    background: var(--teal-tint);
+    border: 1px solid rgba(31, 78, 74, 0.2);
+    border-radius: var(--radius-sm);
+    padding: 12px 22px;
+    cursor: pointer;
+    transition: background 0.18s var(--ease), transform 0.18s var(--ease);
+}
+
+.btn-secondary:hover { background: #dcece8; transform: translateY(-1px); }
+
+.btn-secondary:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* --------------------------------------------------------------------
+   Options
+   -------------------------------------------------------------------- */
+.options-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+}
+
+.option-card {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 16px 20px;
+    border-radius: var(--radius-sm);
+    border: 1.5px solid var(--border);
+    background: #ffffff;
+    cursor: pointer;
+    transition: border-color 0.18s var(--ease), background 0.18s var(--ease), transform 0.18s var(--ease);
+    user-select: none;
+}
+
+.option-card:hover {
+    border-color: var(--gold);
+    background: #fdfaf3;
+    transform: translateX(2px);
+}
+
+.option-card input[type="radio"] {
+    appearance: none;
+    width: 19px;
+    height: 19px;
+    border: 2px solid #cbbfa9;
+    border-radius: 50%;
+    margin-right: 15px;
+    outline: none;
+    transition: all 0.18s var(--ease);
+    flex-shrink: 0;
+}
+
+.option-card input[type="radio"]:checked {
+    border-color: var(--maroon);
+    border-width: 6px;
+    background: #ffffff;
+}
+
+.option-card:has(input[type="radio"]:checked) {
+    border-color: var(--maroon);
+    background: var(--maroon-tint);
+    box-shadow: 0 3px 12px rgba(139, 38, 53, 0.1);
+}
+
+.option-letter {
+    font-weight: 700;
+    color: var(--maroon);
+    margin-right: 4px;
+}
+
+.option-text {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+}
+
+/* --------------------------------------------------------------------
+   Result page — score
+   -------------------------------------------------------------------- */
+.score-container {
+    background: linear-gradient(180deg, #fffaf0 0%, #fdf3e4 100%);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px;
+    margin-bottom: 28px;
+}
+
+.score-label {
+    font-size: 11.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--body-text);
+    margin-bottom: 10px;
+}
+
+.score-value {
+    font-family: 'Fraunces', serif;
+    font-size: 58px;
+    font-weight: 700;
+    color: var(--maroon);
+    line-height: 1;
+    letter-spacing: -0.02em;
+}
+
+.score-total {
+    font-size: 21px;
+    color: var(--muted);
+    font-weight: 600;
+}
+
+.trophy-badge {
+    width: 72px;
+    height: 72px;
+    background: var(--teal-tint);
+    border: 2px solid rgba(31, 78, 74, 0.2);
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 22px;
+    font-size: 32px;
+    animation: pop-in 0.5s var(--ease) 0.15s both;
+}
+
+@keyframes pop-in {
+    from { opacity: 0; transform: scale(0.75); }
+    to   { opacity: 1; transform: scale(1); }
+}
+
+.message {
+    font-size: 14px;
+    color: var(--body-text);
+    margin-bottom: 34px;
+    line-height: 1.55;
+}
+
+.candidate-name {
+    font-size: 14.5px;
+    color: var(--body-text);
+    margin-bottom: 32px;
+}
+
+.candidate-name strong { color: var(--ink); font-weight: 700; }
+
+/* --------------------------------------------------------------------
+   Responsive
+   -------------------------------------------------------------------- */
+@media (max-width: 560px) {
+    .card-inner { padding: 38px 26px 32px; }
+    .quiz-header { padding: 24px; }
+    .question-card { padding: 26px 22px; }
+    .score-value { font-size: 46px; }
+    h1.display { font-size: 27px; }
+}
