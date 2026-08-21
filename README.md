@@ -1,5 +1,16 @@
 # Sirajganj District Knowledge Quiz project
 
+## 📸 Screenshots
+
+<p align="center">
+  <img src="screenshots/home.png" width="45%">
+  <img src="screenshots/quiz.png" width="45%">
+</p>
+
+<p align="center">
+  <img src="screenshots/result.png" width="45%">
+  <img src="screenshots/admin-questions.png" width="45%">
+</p>
 A Servlet, JSP, and JDBC CRUD application.
 
 Players answer **20 random unique questions** from a bank of 20 questions about Sirajganj District, Bangladesh.
